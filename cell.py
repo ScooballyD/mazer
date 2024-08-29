@@ -6,6 +6,7 @@ class Cell:
         self.has_right_wall = True
         self.has_top_wall = True
         self.has_bottom_wall = True
+        self.visited = False
 
         self._x1 = point1.x
         self._x2 = point2.x
@@ -24,24 +25,44 @@ class Cell:
             p2 = Point(self._x1, self._y2)
             left_line = Line(p1, p2)
             self._win.draw_line(left_line, "black")
+        if not self.has_left_wall:
+            p1 = Point(self._x1, self._y1)
+            p2 = Point(self._x1, self._y2)
+            left_line = Line(p1, p2)
+            self._win.draw_line(left_line, "white")
         
         if self.has_right_wall:
             p1 = Point(self._x2, self._y1)
             p2 = Point(self._x2, self._y2)
             right_line = Line(p1, p2)
             self._win.draw_line(right_line, "black")
+        if not self.has_right_wall:
+            p1 = Point(self._x2, self._y1)
+            p2 = Point(self._x2, self._y2)
+            right_line = Line(p1, p2)
+            self._win.draw_line(right_line, "white")
 
-        if self.has_top_wall:
+        if self.has_bottom_wall:
             p1 = Point(self._x1, self._y1)
             p2 = Point(self._x2, self._y1)
             top_line = Line(p1, p2)
             self._win.draw_line(top_line, "black")
+        if not self.has_bottom_wall:
+            p1 = Point(self._x1, self._y1)
+            p2 = Point(self._x2, self._y1)
+            top_line = Line(p1, p2)
+            self._win.draw_line(top_line, "white")
 
-        if self.has_bottom_wall:
+        if self.has_top_wall:
             p1 = Point(self._x1, self._y2)
             p2 = Point(self._x2, self._y2)
             bottom_line = Line(p1, p2)
             self._win.draw_line(bottom_line, "black")
+        if not self.has_top_wall:
+            p1 = Point(self._x1, self._y2)
+            p2 = Point(self._x2, self._y2)
+            bottom_line = Line(p1, p2)
+            self._win.draw_line(bottom_line, "white")
 
         
     def draw_move(self, to_cell, undo=False):
@@ -51,3 +72,4 @@ class Cell:
         
         line = Line(self.cent, to_cell.cent)
         self._win.draw_line(line, color)
+ 
